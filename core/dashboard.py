@@ -7,6 +7,7 @@ from config import TRAIN_ROUTES
 from core.school import format_next_class, format_today_schedule
 from core.train import format_next_train_response
 from core.commute import format_commute_plan
+from core.outfit import format_outfit_advice
 from core.visuals import make_schedule_card, make_train_card
 from core.school import get_current_day_and_time, get_user_classes
 from core.train import find_next_train
@@ -14,11 +15,11 @@ from shared import format_timedelta
 
 
 def _main_keyboard():
+    # Only the daily-use buttons stay in the main dashboard.
     return InlineKeyboardMarkup([
+        [InlineKeyboardButton("🧭 Commute", callback_data="dash_commute"), InlineKeyboardButton("👕 Outfit", callback_data="dash_outfit")],
         [InlineKeyboardButton("🎓 School", callback_data="dash_school"), InlineKeyboardButton("🚆 Train", callback_data="dash_train")],
-        [InlineKeyboardButton("🧭 Commute Plan", callback_data="dash_commute")],
-        [InlineKeyboardButton("🖼 Today Card", callback_data="dash_today_card"), InlineKeyboardButton("🖼 Train Card", callback_data="dash_train_card")],
-        [InlineKeyboardButton("⚙️ Settings", callback_data="dash_settings")],
+        [InlineKeyboardButton("🌦 Weather", callback_data="dash_weather_note"), InlineKeyboardButton("⚙️ Settings", callback_data="dash_settings")],
     ])
 
 
@@ -47,14 +48,12 @@ async def dashboard_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
         text = format_next_train_response(user_id, 'to_rabat')
     elif data == "dash_commute":
         text = format_commute_plan(user_id)
+    elif data == "dash_outfit":
+        text = format_outfit_advice(user_id)
+    elif data == "dash_weather_note":
+        text = "Use /weather for current weather, or /outfit for all-day weather-based clothing advice across Benslimane, Bouznika, and Rabat."
     elif data == "dash_settings":
         text = "Use /settings to update route, group, and travel times."
-    elif data == "dash_today_card":
-        await send_today_card(update, context, from_callback=True)
-        return
-    elif data == "dash_train_card":
-        await send_train_card(update, context, from_callback=True)
-        return
     else:
         text = "Unknown dashboard action."
 

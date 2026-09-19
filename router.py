@@ -1,6 +1,6 @@
 from telegram.ext import CommandHandler, CallbackQueryHandler
 
-from core import train, school, tasks, weather, alerts, dashboard, commute
+from core import train, school, tasks, weather, alerts, dashboard, commute, outfit
 from core.tasks import get_todo_conversation_handler
 from core.settings import get_settings_conversation_handler
 from core.homework import get_homework_conversation_handler
@@ -32,6 +32,8 @@ def setup_handlers(application):
     application.add_handler(CommandHandler("traincard", dashboard.send_train_card))
     application.add_handler(CommandHandler("commute", commute.commute_command))
     application.add_handler(CommandHandler("plan", commute.commute_command))
+    application.add_handler(CommandHandler("outfit", outfit.outfit_command))
+    application.add_handler(CommandHandler("clothes", outfit.outfit_command))
 
     # Utilities
     application.add_handler(CommandHandler("weather", weather.weather_command))
