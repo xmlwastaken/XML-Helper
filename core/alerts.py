@@ -15,29 +15,31 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     get_user_settings(user_id)
     
     welcome_message = (
-        "Welcome to your Personal Assistant Bot!\n\n"
-        "I'm here to help you stay organized. You can check your train and "
-        "school schedules, get weather updates, manage tasks, and configure "
-        "settings right from this chat.\n\n"
-        "📋 All Available Commands\n\n"
+        "✨ Welcome to *XML Helper* — your smarter school and commute assistant.\n\n"
+        "Use the dashboard for the best experience, or use quick commands when you're in a hurry.\n\n"
+        "🔥 Main:\n"
+        "/dashboard - Rich button dashboard\n"
+        "/commute - Smart plan for your next class\n\n"
         "🏫 School:\n"
         "/school - School menu\n"
         "/today - Today's classes\n"
         "/nextclass - Next upcoming class\n"
         "/week - Full weekly schedule\n"
+        "/card - Generate a visual timetable image\n"
         "/homework - Manage assignments\n\n"
         "🚆 Train:\n"
         "/train - Train menu\n"
         "/nexttrain - Next train to Rabat\n"
-        "/fromrabat - Next train from Rabat\n\n"
+        "/fromrabat - Next train from Rabat\n"
+        "/traincard - Generate a visual train image\n\n"
         "🛠️ Utilities:\n"
         "/tasks - To-do list\n"
         "/weather - Weather forecast\n"
-        "/settings - Bot settings\n\n"
-        "Simply click any command above to use it!"
+        "/settings - Route, group, and travel times\n\n"
+        "Tip: keep your Telegram token only in Wispbyte environment variables."
     )
     if update.message:
-        await update.message.reply_text(welcome_message)
+        await update.message.reply_text(welcome_message, parse_mode='Markdown')
 
 async def send_todo_reminder(context: ContextTypes.DEFAULT_TYPE):
     """Restored missing function to fix the ImportError"""
