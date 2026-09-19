@@ -3,6 +3,7 @@ import datetime
 import logging
 import pytz
 from dotenv import load_dotenv
+from telegram import BotCommand
 from telegram.ext import Application, ContextTypes
 from telegram.error import Conflict
 
@@ -24,13 +25,32 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
     if isinstance(context.error, Conflict):
         logger.fatal("Conflict: Another instance is running with this token. Please ensure only one server is active.")
 
+
+async def post_init(application: Application) -> None:
+    """Register Telegram's command menu so the bot is easier to use."""
+    await application.bot.set_my_commands([
+        BotCommand("start", "Show all commands"),
+        BotCommand("school", "Open school menu"),
+        BotCommand("today", "Show today's classes"),
+        BotCommand("nextclass", "Show the next class"),
+        BotCommand("week", "Show weekly schedule"),
+        BotCommand("train", "Open train menu"),
+        BotCommand("nexttrain", "Next train to Rabat"),
+        BotCommand("fromrabat", "Next train from Rabat"),
+        BotCommand("homework", "Manage assignments"),
+        BotCommand("tasks", "Manage to-do list"),
+        BotCommand("weather", "Weather forecast"),
+        BotCommand("settings", "Bot settings"),
+    ])
+
+
 def main() -> None:
     bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
     if not bot_token:
         logger.error("Error: TELEGRAM_BOT_TOKEN environment variable is not set.")
         exit(1)
 
-    application = Application.builder().token(bot_token).build()
+    application = Application.builder().token(bot_token).post_init(post_init).build()
     
     # Register global error handler
     application.add_error_handler(error_handler)

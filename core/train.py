@@ -123,6 +123,31 @@ def find_next_train(user_id: str, direction: str):
                 }
     return None
 
+def format_next_train_response(user_id: str, direction: str) -> str:
+    direction_key = "to_rabat" if direction == "to_rabat" else "from_rabat"
+    dir_icon = "➡" if direction_key == "to_rabat" else "⬅"
+    next_train_data = find_next_train(user_id, direction_key)
+
+    if not next_train_data:
+        return "🌙 *No more trains available today*"
+
+    t_num = str(next_train_data.get('train_number', 'N/A'))
+    t_type = next_train_data.get('train_type', '')
+    type_disp = f" ({t_type})" if t_type else ""
+    time_to = format_timedelta(next_train_data['time_to'])
+    weekend_warning = "\n\n📌 *Note:* This train does not run on Sundays/public holidays" if not next_train_data.get('operates_weekends', True) else ""
+
+    return (
+        f"{dir_icon} *Next Train - {next_train_data['route_name']}*\n\n"
+        f"🚆 *Train {t_num}{type_disp}*\n"
+        f"⏰ *Departing:* {time_to}\n"
+        f"📍 *Departure:* {next_train_data['departure_time']}\n"
+        f"🎯 *Arrival:* {next_train_data['arrival_time']}\n\n"
+        f"🌤 *Weather in {next_train_data['weather_city']} at arrival:*\n"
+        f"{next_train_data['destination_weather']}{weekend_warning}"
+    )
+
+
 def format_full_day_schedule(user_id: str, direction: str):
     train_data, to_rabat_key, from_rabat_key, route_name = get_user_train_data(user_id)
     now = datetime.now(MOROCCO_TZ_OBJ)
@@ -183,7 +208,11 @@ async def train_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
-    msg = f"🚆 *Train Schedule - {train_route}*\n\nCheck train times and schedules for your commute:"
+    msg = (
+        f"🚆 *Train Schedule - {train_route}*\n\n"
+        "Check train times and schedules for your commute.\n"
+        "Trains marked 🚫 do not run on Sundays/public holidays."
+    )
     if update.message:
         await update.message.reply_text(msg, reply_markup=reply_markup, parse_mode='Markdown')
     elif update.callback_query:
@@ -191,6 +220,16 @@ async def train_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             await update.callback_query.message.edit_text(msg, reply_markup=reply_markup, parse_mode='Markdown')
         except BadRequest as e:
             if "Message is not modified" not in str(e): raise
+
+
+async def next_to_rabat_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_id = str(update.effective_user.id)
+    await update.message.reply_text(format_next_train_response(user_id, "to_rabat"), parse_mode='Markdown')
+
+
+async def next_from_rabat_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    user_id = str(update.effective_user.id)
+    await update.message.reply_text(format_next_train_response(user_id, "from_rabat"), parse_mode='Markdown')
 
 async def next_train_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query

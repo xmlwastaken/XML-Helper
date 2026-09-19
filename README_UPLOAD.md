@@ -24,3 +24,12 @@ Manual corrections applied after timetable review:
 - Monday Maintenance: 16:45-18:45
 - Tuesday Management et contrôle Qualité: 15:00-18:15
 - Wednesday Audit et efficacité énergétique: 10:15-11:45
+
+Bot improvements included:
+- Added Telegram command menu setup on startup.
+- Added quick commands: `/today`, `/week`, `/nextclass`, `/nexttrain`, `/fromrabat`.
+- Added a Next Class button in the school menu.
+- School timetable now reloads cleanly after updates/restarts.
+- Morning commute reminders now respect school group filtering.
+- Train reminders now skip trains marked as not running on Sundays/public holidays.
+- Runtime/private user data is ignored for GitHub safety.

@@ -17,7 +17,12 @@ def setup_handlers(application):
     application.add_handler(CommandHandler("start", alerts.start))
     application.add_handler(CommandHandler("weather", weather.weather_command))
     application.add_handler(CommandHandler("train", train.train_command))
+    application.add_handler(CommandHandler("nexttrain", train.next_to_rabat_command))
+    application.add_handler(CommandHandler("fromrabat", train.next_from_rabat_command))
     application.add_handler(CommandHandler("school", school.school_command))
+    application.add_handler(CommandHandler("today", school.today_command))
+    application.add_handler(CommandHandler("week", school.week_command))
+    application.add_handler(CommandHandler("nextclass", school.next_class_command))
     application.add_handler(CommandHandler("homework", get_homework_conversation_handler().entry_points[0].callback))
     
     application.add_handler(CallbackQueryHandler(train.next_train_callback, pattern="^next_"))
@@ -27,7 +32,7 @@ def setup_handlers(application):
     application.add_handler(
         CallbackQueryHandler(
             school.handle_school_schedule,
-            pattern="^(today_schedule|weekly_overview)$",
+            pattern="^(today_schedule|weekly_overview|next_school_class)$",
         )
     )
     application.add_handler(CallbackQueryHandler(school.back_to_school_menu, pattern="^school_back_to_menu$"))

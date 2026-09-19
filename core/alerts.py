@@ -8,6 +8,7 @@ from telegram.ext import ContextTypes
 
 from shared import load_json, get_user_settings, get_user_tasks
 from config import USER_SETTINGS_FILE, SCHOOL_SCHEDULE_FILE, MOROCCO_TZ, TRAIN_ROUTES, BOUZNIKA_TIMETABLE_FILE, MOHAMMEDIA_TIMETABLE_FILE
+from core.train import is_sunday_or_holiday
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = str(update.effective_user.id)
@@ -20,10 +21,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "settings right from this chat.\n\n"
         "📋 All Available Commands\n\n"
         "🏫 School:\n"
-        "/school - View class schedule\n"
+        "/school - School menu\n"
+        "/today - Today's classes\n"
+        "/nextclass - Next upcoming class\n"
+        "/week - Full weekly schedule\n"
         "/homework - Manage assignments\n\n"
         "🚆 Train:\n"
-        "/train - Check train schedules\n\n"
+        "/train - Train menu\n"
+        "/nexttrain - Next train to Rabat\n"
+        "/fromrabat - Next train from Rabat\n\n"
         "🛠️ Utilities:\n"
         "/tasks - To-do list\n"
         "/weather - Weather forecast\n"
@@ -79,11 +85,19 @@ def get_weather_for_rabat() -> str:
     except requests.exceptions.RequestException:
         return "Could not retrieve weather data."
 
+def filter_classes_for_group(day_schedule: list, school_group: str) -> list:
+    return [
+        subject for subject in day_schedule
+        if not subject.get('group') or subject.get('group') == school_group
+    ]
+
+
 def format_day_schedule(day_schedule: list) -> str:
     schedule_text = ""
     for subject in day_schedule:
+        group_text = f" ({subject['group']})" if subject.get('group') else ""
         schedule_text += (
-            f"  • {subject['subject']}\n"
+            f"  • {subject['subject']}{group_text}\n"
             f"    Time: {subject['start_time']} - {subject['end_time']}\n"
             f"    Location: {subject['location']}\n"
         )
@@ -109,13 +123,20 @@ async def schedule_departure_reminder(context: ContextTypes.DEFAULT_TYPE):
     today = datetime.now(morocco_tz)
     day_name = today.strftime('%A').upper()
 
-    day_schedule = school_schedule.get(day_name, [])
-    if not day_schedule:
+    raw_day_schedule = school_schedule.get(day_name, [])
+    if not raw_day_schedule:
         return
+
+    is_sun_hol = is_sunday_or_holiday(today)
 
     for user_id_str, settings in all_settings.items():
         user_id = settings.get("user_telegram_id")
         if not user_id:
+            continue
+
+        user_group = settings.get('school_group', 'G1')
+        day_schedule = filter_classes_for_group(raw_day_schedule, user_group)
+        if not day_schedule:
             continue
 
         train_route = settings.get('train_route', 'bouznika_rabat')
@@ -141,6 +162,9 @@ async def schedule_departure_reminder(context: ContextTypes.DEFAULT_TYPE):
         trains_to_rabat = train_data.get(station_key, [])
         
         for train in reversed(trains_to_rabat):
+            if is_sun_hol and not train.get('operates_weekends', True):
+                continue
+
             if train_route == 'mohammedia_rabat':
                 arrival_time_str = train.get("arrival")
             else:
