@@ -1,0 +1,73 @@
+{
+  "MONDAY": [
+    {
+      "start_time": "08:30",
+      "end_time": "12:45",
+      "subject": "Commande dans l'espace d'état",
+      "location": "4A / LI4(C1B) - EMSI Centre 1"
+    },
+    {
+      "start_time": "15:00",
+      "end_time": "16:30",
+      "subject": "Français 5",
+      "location": "4A - EMSI Centre 1"
+    },
+    {
+      "start_time": "16:45",
+      "end_time": "18:45",
+      "subject": "Maintenance",
+      "location": "4A - EMSI Centre 1"
+    }
+  ],
+  "TUESDAY": [
+    {
+      "start_time": "08:30",
+      "end_time": "10:30",
+      "subject": "Ville intelligente",
+      "location": "2A - EMSI Centre 1"
+    },
+    {
+      "start_time": "10:45",
+      "end_time": "12:15",
+      "subject": "Sécurité industrielle",
+      "location": "2A - EMSI Centre 1"
+    },
+    {
+      "start_time": "15:00",
+      "end_time": "18:15",
+      "subject": "Management et contrôle Qualité",
+      "location": "3A - EMSI Centre 1"
+    }
+  ],
+  "WEDNESDAY": [
+    {
+      "start_time": "10:15",
+      "end_time": "11:45",
+      "subject": "Audit et efficacité énergétique",
+      "location": "1B - EMSI Centre 1"
+    },
+    {
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "subject": "Compétences d'employabilité",
+      "location": "4A - EMSI Centre 1"
+    },
+    {
+      "start_time": "16:15",
+      "end_time": "17:45",
+      "subject": "Business English",
+      "location": "4A - EMSI Centre 1"
+    }
+  ],
+  "THURSDAY": [
+    {
+      "start_time": "08:30",
+      "end_time": "12:45",
+      "subject": "Energies renouvelables : Production et stockage",
+      "location": "3A EMSI Hassan / LI6 EMSI Centre 1"
+    }
+  ],
+  "FRIDAY": [],
+  "SATURDAY": [],
+  "SUNDAY": []
+}

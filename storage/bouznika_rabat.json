@@ -1,0 +1,211 @@
+{
+  "bouznika_to_rabat": [
+    {
+      "train_number": "1",
+      "Bouznika": "06:50",
+      "Rabat Ville": "07:33",
+      "operates_weekends": false
+    },
+    {
+      "train_number": "3",
+      "Bouznika": "07:38",
+      "Rabat Ville": "08:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "7",
+      "Bouznika": "08:38",
+      "Rabat Ville": "09:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "11",
+      "Bouznika": "09:38",
+      "Rabat Ville": "10:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "19",
+      "Bouznika": "11:38",
+      "Rabat Ville": "12:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "23",
+      "Bouznika": "12:38",
+      "Rabat Ville": "13:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "27",
+      "Bouznika": "13:38",
+      "Rabat Ville": "14:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "31",
+      "Bouznika": "14:38",
+      "Rabat Ville": "15:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "35",
+      "Bouznika": "15:38",
+      "Rabat Ville": "16:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "39",
+      "Bouznika": "16:38",
+      "Rabat Ville": "17:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "43",
+      "Bouznika": "17:38",
+      "Rabat Ville": "18:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "47",
+      "Bouznika": "18:38",
+      "Rabat Ville": "19:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "51",
+      "Bouznika": "19:38",
+      "Rabat Ville": "20:21",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "55",
+      "Bouznika": "20:38",
+      "Rabat Ville": "21:21",
+      "operates_weekends": true
+    }
+  ],
+  "rabat_to_bouznika": [
+    {
+      "train_number": "2",
+      "Rabat Ville": "05:59",
+      "Bouznika": "06:35",
+      "operates_weekends": false
+    },
+    {
+      "train_number": "4",
+      "Rabat Ville": "06:56",
+      "Bouznika": "07:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "6",
+      "Rabat Ville": "07:41",
+      "Bouznika": "08:17",
+      "operates_weekends": false
+    },
+    {
+      "train_number": "8",
+      "Rabat Ville": "07:56",
+      "Bouznika": "08:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "10",
+      "Rabat Ville": "08:41",
+      "Bouznika": "09:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "14",
+      "Rabat Ville": "09:42",
+      "Bouznika": "10:18",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "20",
+      "Rabat Ville": "10:56",
+      "Bouznika": "11:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "24",
+      "Rabat Ville": "11:56",
+      "Bouznika": "12:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "28",
+      "Rabat Ville": "12:56",
+      "Bouznika": "13:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "30",
+      "Rabat Ville": "13:41",
+      "Bouznika": "14:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "34",
+      "Rabat Ville": "14:41",
+      "Bouznika": "15:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "36",
+      "Rabat Ville": "14:56",
+      "Bouznika": "15:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "38",
+      "Rabat Ville": "15:41",
+      "Bouznika": "16:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "40",
+      "Rabat Ville": "15:56",
+      "Bouznika": "16:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "42",
+      "Rabat Ville": "16:41",
+      "Bouznika": "17:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "44",
+      "Rabat Ville": "16:56",
+      "Bouznika": "17:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "48",
+      "Rabat Ville": "17:56",
+      "Bouznika": "18:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "52",
+      "Rabat Ville": "18:56",
+      "Bouznika": "19:32",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "54",
+      "Rabat Ville": "19:41",
+      "Bouznika": "20:17",
+      "operates_weekends": true
+    },
+    {
+      "train_number": "60",
+      "Rabat Ville": "20:56",
+      "Bouznika": "21:32",
+      "operates_weekends": true
+    }
+  ],
+  "_source": "Casa-Kenitra-phase-2.pdf - effective from 2026-09-14; * trains do not operate Sundays/public holidays"
+}

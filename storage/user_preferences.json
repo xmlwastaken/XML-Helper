@@ -1,0 +1,16 @@
+{
+    "2127596837": {
+        "travel_time_to_station_mins": 45,
+        "travel_time_from_station_to_school_mins": 7,
+        "train_route": "bouznika_rabat",
+        "user_telegram_id": "2127596837",
+        "school_group": "G1"
+    },
+    "7137666759": {
+        "travel_time_to_station_mins": 30,
+        "travel_time_from_station_to_school_mins": 7,
+        "train_route": "mohammedia_rabat",
+        "user_telegram_id": "7137666759",
+        "school_group": "G1"
+    }
+}
